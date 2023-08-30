@@ -1,21 +1,20 @@
-import { useEffect, useState } from "react"
-import DisplayCounter from "./DisplayCounter";
-function Count(props){
-    const [count, setCount] = useState(props.init)
-    useEffect(()=> {
-        clearInterval(count)
-    },[count])
-    useState(() =>{
-        const num = setInterval(() => {
-            setCount((el) => el + props.inc)
-        },props.interval);
-        return() =>{
-            clearInterval(num)
-        }
-    })
+import React, { useState, useEffect } from 'react';
+
+function Counter() {
+    const [count, setCount] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCount(prevCount => prevCount + 1);
+    }, 1000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
     return(
-        <DisplayCounter count ={count}/>
+        <h1>{count}</h1>
     )
+
 }
 
-export default Count
+export default Counter;
+    
